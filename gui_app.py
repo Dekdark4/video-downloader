@@ -49,6 +49,10 @@ def start_download():
 def update_ui(result):
     status_label.config(text=result)
     download_btn.config(state="normal")
+
+def enable_ctrl_v(event):
+    """Разрешает вставку по Ctrl+V."""
+    event.widget.event_generate('<<Paste>>')
     
     
 root = tk.Tk()
@@ -59,6 +63,7 @@ root.resizable(False, False)
 tk.Label(root, text="Ссылка на YouTube-видео:").pack(pady=(15, 0))
 url_entry = tk.Entry(root, width=300)
 url_entry.pack(pady=10)
+url_entry.bind('<Control-v>', enable_ctrl_v)
 
 audio_var = tk.BooleanVar()
 tk.Checkbutton(root, text="Только аудио", variable=audio_var).pack()
